@@ -29,19 +29,29 @@ HITszQAbot 是基于深度学习文本分类算法，面向招生信息咨询的
 └── config.py # 配置文件
 ```
 
-## 环境要求
+## 环境
 
 python 3.7 及以上
 
-//TODO 待补充
+pytorch 1.1
+
+tqdm
+
+sklearn
+
+nb-cli 2.0
+
+`nlp_module/bert_pretrain` 下的 pytorch_model.bin 请自行下载，详情见 [Download](./nlp_module/bert_pretrain/README.md)
+
+本项目没有上传训练好的模型，请自行训练
 
 ## 数据
 
-数据文件：./nlp_module/data/train.txt
+数据文件：`./nlp_module/HITSZQA/data/train.txt`
 
-数据格式：question+'\t'+'\_label\_'+label
+数据格式：`question+'\t'+'\_label\_'+label`
 
-将处理好的数据放入 .bot/nn/data 中替换 train.txt
+将处理好的数据放入 `./nlp_module/HITSZQA/data/` 中替换 `train.txt`
 
 ## 训练
 
@@ -51,10 +61,48 @@ https://github.com/L-M-Sherlock/Bert-Chinese-Text-Classification-Pytorch
 
 ## 预测
 
-预测 label：python .nlp_module/RequestHandler.py
+预测 label：`python .nlp_module/RequestHandler.py`
 
-将需要分类的 question 放入 rh_sub.get_result('分类句子') 中运行，得到分类结果
+将需要分类的 question 放入 `rh_sub.get_result('分类句子')` 中运行，得到分类结果
 
 ## 部署
 
+以 Ubuntu 18.04 为例
+
+### go-cqhttp
+
+首先，要安装 go-cqhttp，请执行以下命令：
+
+```shell script
+wget https://github.com/Mrs4s/go-cqhttp/releases/download/v1.0.0-beta2/go-cqhttp_1.0.0-beta2_linux_amd64.deb
+dpkg -i go-cqhttp_1.0.0-beta2_linux_amd64.deb
+```
+
+默认情况下，go-cqhttp 已经安装到 `/usr/local/bin` 之下了。接下来我们要配置 go-cqhttp，请执行以下命令：
+
+```shell script
+cd /usr/local/bin
+./go-cqhttp
+```
+
+初次运行 go-cqhttp 会自动生成配置文件。退出 go-cqhttp 后，请自行修改 config.yml
+
+除了必填的账号和密码外，考虑到之后 NoneBot 需要通过 ws 与 go-cqhttp 通信，请将 config.yml 中的 ws-reverse 一项修改成：
+
+```yaml
+  - ws-reverse:
+      # 是否禁用当前反向WS服务
+      disabled: false  # 开启
+      # 反向WS Universal 地址
+      # 注意 设置了此项地址后下面两项将会被忽略
+      universal: ws://127.0.0.1:8080/cqhttp/ws  # 端口号需要与NoneBot的PORT一致
+```
+
+以上就是 go-cqhttp 的具体配置。
+
+### NoneBot
+
+首先，要 clone 本项目的代码，地址任意。
+
 //TODO 待补充
+
