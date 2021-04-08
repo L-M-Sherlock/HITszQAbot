@@ -141,3 +141,9 @@ dmypy.json
 # End of https://www.toptal.com/developers/gitignore/api/python
 .idea
 /.env.*
+history.txt
+answers.txt
+bert.ckpt
+train.txt
+config.py
+*.bin
