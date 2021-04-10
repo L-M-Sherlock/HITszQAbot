@@ -104,5 +104,29 @@ cd /usr/local/bin
 
 首先，要 clone 本项目的代码，地址任意。
 
-//TODO 待补充
+然后请创建虚拟环境，再执行以下命令安装依赖包：
 
+```shell script
+pip install -r requirements.txt
+```
+
+注意：本项目由于是在 window 上测试的，所以 requirements.txt 中的 pytorch 是 cpu 版本，服务器部署若需要使用显卡，请自行修改。
+
+待依赖安装完毕后，运行以下命令即可开启 NoneBot：
+
+```shell script
+python bot.py
+```
+
+另外，为了让 go-cqhttp 和 nonebot 通信，请在 bot.py 同级目录下建立 .env，并完善以下配置：
+
+```editorconfig
+HOST=127.0.0.1
+PORT=8080
+DEBUG=true
+SUPERUSERS=["<管理员QQ号>"]
+NICKNAME=["<BOT的昵称>"]
+COMMAND_START=["/", ""]
+```
+
+上述内容仅为示例，请按需配置。
