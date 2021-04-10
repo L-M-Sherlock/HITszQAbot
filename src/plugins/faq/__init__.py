@@ -12,7 +12,7 @@ import config as config
 from nlp_module.RequestHandler import RequestHandler
 from ..txt_tools import raw_to_answer, add_at
 
-faq = on_command("问答", rule=to_me(), permission=Permission(), priority=5)
+faq = on_command("", rule=to_me(), permission=Permission(), priority=1)
 
 Q2A_dict = {}
 log_list = []
