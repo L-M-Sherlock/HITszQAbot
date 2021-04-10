@@ -22,9 +22,7 @@ HITszQAbot 是基于深度学习文本分类算法，面向招生信息咨询的
 │		├── faq
 │		│	└── __init__.py # 群问答插件
 │		└── txt_tools.py # 文本处理工具
-├── .env
-├── .env.dev # 开发环境
-├── .env.prod # 生产环境
+├── .env # 环境配置
 ├── bot.py # 启动
 └── config.py # 配置文件
 ```
@@ -33,15 +31,7 @@ HITszQAbot 是基于深度学习文本分类算法，面向招生信息咨询的
 
 python 3.7 及以上
 
-pytorch 1.1
-
-tqdm
-
-sklearn
-
-nb-cli 2.0
-
-`nlp_module/bert_pretrain` 下的 pytorch_model.bin 请自行下载，详情见 [Download](./nlp_module/bert_pretrain/README.md)
+nlp_module/bert_pretrain 下的 pytorch_model.bin 请自行下载，详情见 [bert_pretrain/README.md](./nlp_module/bert_pretrain/README.md)
 
 本项目没有上传训练好的模型，请自行训练
 
