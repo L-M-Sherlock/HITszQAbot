@@ -6,24 +6,12 @@ from nonebot.rule import to_me
 from nonebot.permission import Permission
 from nonebot.typing import T_State
 from nonebot.adapters import Bot, Event
+from ..search import search
 import nonebot.adapters.cqhttp.message as message
 
-import config as config
-from nlp_module.RequestHandler import RequestHandler
-from ..txt_tools import raw_to_answer, add_at
+from ..txt_tools import add_at
 
 faq = on_command("", rule=to_me(), permission=Permission(), priority=1)
-
-Q2A_dict = {}
-log_list = []
-ans_path = path.join(path.dirname(__file__), 'answers.txt')
-
-with open(ans_path, 'r', encoding='UTF-8-sig') as file:
-    lines = file.readlines()
-    for line in lines:
-        tmp_list = line.split('\t')
-        Q2A_dict[tmp_list[0]] = tmp_list[1]
-rh_sub = RequestHandler('bert')
 
 
 @faq.args_parser
@@ -33,36 +21,21 @@ async def parse(bot: Bot, event: Event, state: T_State):
 
 
 @faq.handle()
-async def faq_local(bot: Bot, event: Event):
+async def query(bot: Bot, event: Event):
     raw_question = str(event.get_message())
     question = raw_question.replace(' ', '')
     question = question.replace('\r\n', '')
     if question:
-        reply, confidence = await test_local(question, event.is_tome())
-        if event.is_tome():
-            if confidence < config.CONFIDENCE:
-                reply = '我现在还不太明白，但没关系，以后的我会变得更强呢！'
+        reply = await search_results(question)
+        if event.is_tome() and event.get_user_id() in bot.config.superusers and reply:
             reply = add_at(reply, event.get_user_id())
             await faq.send(message.Message(reply))
 
 
-async def test_local(content, callme):
-    ans, confidence = rh_sub.get_result(content)
-    log = content.replace(',', '，') + ',__label__' + ans + ',' + str(round(confidence, 2)) + ',' + str(
-        int(callme)) + '\n'  # 记录问题和预测标签、置信度
-    global log_list
-    log_list.append(log.encode('GBK'))  # 保存日志到 log_list
-    if len(log_list) >= config.LOG_SAVE_LEN:
-        log_save()  # 日志长度大等于 LOG_SAVE_LEN 时，写入文件
-    ans = Q2A_dict[ans]
-    ans = raw_to_answer(ans)
-    return ans, confidence
-
-
-def log_save():
-    global log_list
-    log_path = path.join(path.dirname(__file__), 'log.csv')
-    f = open(log_path, 'ab+')
-    f.writelines(log_list)
-    log_list = []
-    f.close()
+async def search_results(content):
+    results = search(content, 3)
+    top3 = results[:min(len(results), 3)]
+    if len(top3) == 0:
+        return None
+    text = "\n".join([f"{res.title}：{res.url}" for res in top3])
+    return text
