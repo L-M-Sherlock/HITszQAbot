@@ -2,7 +2,7 @@ from elasticsearch import Elasticsearch
 from elasticsearch_dsl import Search
 from typing import List
 
-from config import INDEX_NAME
+INDEX_NAME = "zhihu_index"
 
 HEADERS = {
     'content-type': 'application/json'

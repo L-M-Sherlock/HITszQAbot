@@ -1,12 +1,11 @@
 # encoding:utf-8
-from os import path
 
 from nonebot import on_command
 from nonebot.rule import to_me
 from nonebot.permission import Permission
 from nonebot.typing import T_State
 from nonebot.adapters import Bot, Event
-from ..search import search
+from tools.search import search
 import nonebot.adapters.cqhttp.message as message
 
 from ..txt_tools import add_at
@@ -27,7 +26,8 @@ async def query(bot: Bot, event: Event):
     question = question.replace('\r\n', '')
     if question:
         reply = await search_results(question)
-        if event.is_tome() and event.get_user_id() in bot.config.superusers and reply:
+        _, group_id, user_id = event.get_session_id().split("_")
+        if event.is_tome() and reply and (user_id in bot.config.superusers or group_id in bot.config.groups):
             reply = add_at(reply, event.get_user_id())
             await faq.send(message.Message(reply))
 
