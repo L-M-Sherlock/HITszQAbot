@@ -1,5 +1,5 @@
 from elasticsearch import Elasticsearch
-from config import INDEX_NAME
+INDEX_NAME = "zhihu_index"
 import pandas as pd
 
 
