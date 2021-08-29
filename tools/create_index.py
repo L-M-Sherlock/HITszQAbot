@@ -27,7 +27,7 @@ def main():
             'settings': {},
         },
     )
-    df = pd.read_csv('./index.csv', index_col=False, names=['title', 'url'])
+    df = pd.read_csv('./index.csv', index_col=False, names=['title', 'url','type'])
     for idx, line in df.iterrows():
         try:
             es.create(

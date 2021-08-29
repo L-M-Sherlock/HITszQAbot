@@ -35,7 +35,8 @@ async def query(bot: Bot, event: Event):
         else:
             _, group_id, user_id = result
         if event.is_tome() and reply and (user_id in bot.config.superusers or group_id in bot.config.groups):
-            reply = add_at(reply, event.get_user_id())
+            # reply = add_at(reply, event.get_user_id())
+            # logger.info(reply)
             await faq.send(message.Message(reply))
 
 
@@ -43,6 +44,7 @@ async def search_results(content):
     results = search(content, 3)
     top3 = results[:min(len(results), 3)]
     if len(top3) == 0:
-        return None
+        return "暂无搜索结果"
     text = "\n".join([f"{res.title}：{res.url}" for res in top3])
+    logger.info(text)
     return text
