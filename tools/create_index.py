@@ -28,6 +28,9 @@ def main():
         },
     )
     df = pd.read_csv('./index.csv', index_col=False, names=['title', 'url','type'])
+    df = df[(df['type']!='question')&(df['type']!='pin')]
+    df2 = pd.read_csv('./yuque_index.csv', index_col=False, names=['title', 'url','type'])
+    df = df.append(df2)
     for idx, line in df.iterrows():
         try:
             es.create(

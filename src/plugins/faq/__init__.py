@@ -44,7 +44,7 @@ async def search_results(content):
     results = search(content, 3)
     top3 = results[:min(len(results), 3)]
     if len(top3) == 0:
-        return "暂无搜索结果"
+        return "暂无搜索结果，去知乎提问试试吧～"
     text = "\n".join([f"{res.title}：{res.url}" for res in top3])
     logger.info(text)
     return text
