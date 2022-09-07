@@ -1,6 +1,7 @@
 # encoding:utf-8
 
 from nonebot import on_command
+from nonebot.matcher import Matcher
 from nonebot.rule import to_me
 from nonebot.permission import Permission, SUPERUSER
 from nonebot.typing import T_State
@@ -11,15 +12,9 @@ from tools.create_task import *
 
 newtask = on_command("task", rule=to_me(), aliases={"上工", "推荐上工"}, permission=Permission(), priority=1)
 
-
-@newtask.args_parser
-async def parse(bot: Bot, event: Event, state: T_State):
-    logger.info(state["_current_key"], ":", str(event.get_message()))
-    state[state["_current_key"]] = str(event.get_message())
-
-
 @newtask.handle()
-async def query(bot: Bot, event: Event):
+async def query(bot: Bot, event: Event, matcher: Matcher):
+    matcher.stop_propagation()
     reply = await new_task()
     result = event.get_session_id().split("_")
     logger.info(result)
@@ -39,7 +34,7 @@ async def new_task():
 
 updatetask = on_command("new", rule=to_me(), aliases={"更新任务"}, permission=SUPERUSER, priority=5)
 
-@newtask.handle()
+@updatetask.handle()
 async def update_task(bot: Bot, event: Event):
     get_files_list()
     calc_priority()

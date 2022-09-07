@@ -1,7 +1,6 @@
 import pytz
 import random
-from tkinter.messagebox import NO
-from paratranz_api import get
+from .paratranz_api import get
 import pandas as pd
 import numpy as np
 from tqdm import tqdm
@@ -43,6 +42,7 @@ def random_task():
     try:
         task_list = pd.read_csv("./task_list.csv", index_col=None)
     except FileNotFoundError:
+        print("FileNotFound")
         get_files_list()
         calc_priority()
         task_list = pd.read_csv("./task_list.csv", index_col=None)
@@ -72,6 +72,7 @@ def weight_choice(weight):
             return i    
 
 if __name__ == "__main__":
-    get_files_list()
-    calc_priority()
-    print(get_result(random_task()))
+    #get_files_list()
+    #calc_priority()
+    #print(get_result(random_task()))
+    print(1)

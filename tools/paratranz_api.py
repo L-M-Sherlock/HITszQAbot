@@ -1,7 +1,7 @@
 import requests
 from nonebot import config
 
-ApiKey = config.apikey
+ApiKey = config.Env().apikey
 
 headers = {
     'Content-type': 'application/json',

@@ -13,13 +13,6 @@ from ..txt_tools import add_at
 
 faq = on_command("", rule=to_me(), permission=Permission(), priority=10)
 
-
-@faq.args_parser
-async def parse(bot: Bot, event: Event, state: T_State):
-    logger.info(state["_current_key"], ":", str(event.get_message()))
-    state[state["_current_key"]] = str(event.get_message())
-
-
 @faq.handle()
 async def query(bot: Bot, event: Event):
     raw_question = str(event.get_message())
