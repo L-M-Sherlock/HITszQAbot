@@ -148,3 +148,4 @@ train.txt
 config.py
 *.bin
 /src/plugins/faq/log.csv
+.DS_store
