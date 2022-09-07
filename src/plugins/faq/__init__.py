@@ -11,7 +11,7 @@ from nonebot.log import logger
 
 from ..txt_tools import add_at
 
-faq = on_command("", rule=to_me(), permission=Permission(), priority=1)
+faq = on_command("", rule=to_me(), permission=Permission(), priority=10)
 
 
 @faq.args_parser
