@@ -41,7 +41,7 @@ def search(term: str, count: int) -> List[SearchResult]:
                     "match": {
                         "title": {
                             "query": term,
-                            "operator": "and",
+                            "operator": "or",
                             "fuzziness": "AUTO"
                         }
                     }
@@ -50,7 +50,7 @@ def search(term: str, count: int) -> List[SearchResult]:
                     "match": {
                         "title.chinese_analyzed": {
                             "query": term,
-                            "operator": "and"
+                            "operator": "or"
                         }
                     }
                 }
