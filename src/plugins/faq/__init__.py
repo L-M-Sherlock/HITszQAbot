@@ -3,7 +3,6 @@
 from nonebot import on_command
 from nonebot.rule import to_me
 from nonebot.permission import Permission
-from nonebot.typing import T_State
 from nonebot.adapters import Bot, Event
 from tools.search import search
 import nonebot.adapters.cqhttp.message as message
