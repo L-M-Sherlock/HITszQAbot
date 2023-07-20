@@ -28,7 +28,7 @@ poyo==0.5.0
 prompt-toolkit==1.0.14
 pydantic==1.8.2
 pyfiglet==0.8.post1
-Pygments==2.8.1
+Pygments==2.15.0
 pygtrie==2.4.2
 PyInquirer==1.0.3
 python-dateutil==2.8.1
