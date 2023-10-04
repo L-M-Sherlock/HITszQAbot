@@ -23,7 +23,7 @@ nonebot-adapter-cqhttp==2.0.0a12
 nonebot2==2.0.0a13.post1
 numpy==1.22.0
 pandas==1.2.3
-Pillow==9.3.0
+Pillow==10.0.1
 poyo==0.5.0
 prompt-toolkit==1.0.14
 pydantic==1.8.2
