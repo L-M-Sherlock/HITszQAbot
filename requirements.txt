@@ -26,7 +26,7 @@ pandas==1.2.3
 Pillow==10.3.0
 poyo==0.5.0
 prompt-toolkit==1.0.14
-pydantic==1.8.2
+pydantic==1.10.13
 pyfiglet==0.8.post1
 Pygments==2.15.0
 pygtrie==2.4.2
