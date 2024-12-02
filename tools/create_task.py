@@ -4,7 +4,7 @@ from .paratranz_api import get
 import pandas as pd
 import numpy as np
 from tqdm import tqdm
-from datetime import datetime, timezone
+from datetime import datetime
 
 def get_files_list():
     file_list = get("files").json()
@@ -72,7 +72,7 @@ def weight_choice(weight):
             return i    
 
 if __name__ == "__main__":
-    #get_files_list()
-    #calc_priority()
-    #print(get_result(random_task()))
+    get_files_list()
+    calc_priority()
+    print(get_result(random_task()))
     print(1)

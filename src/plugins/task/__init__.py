@@ -4,13 +4,12 @@ from nonebot import on_command
 from nonebot.matcher import Matcher
 from nonebot.rule import to_me
 from nonebot.permission import Permission, SUPERUSER
-from nonebot.typing import T_State
 from nonebot.adapters import Bot, Event
 import nonebot.adapters.cqhttp.message as message
 from nonebot.log import logger
 from tools.create_task import *
 
-newtask = on_command("task", rule=to_me(), aliases={"上工", "推荐上工"}, permission=Permission(), priority=1)
+newtask = on_command("task", rule=to_me(), aliases={"上工"}, permission=Permission(), priority=1)
 
 @newtask.handle()
 async def query(bot: Bot, event: Event, matcher: Matcher):
