@@ -49,7 +49,7 @@ starlette==0.40.0
 text-unidecode==1.3
 threadpoolctl==2.1.0
 tomlkit==0.7.0
-torch==2.2.0
+torch==2.6.0
 torchaudio==0.8.1
 torchvision==0.9.1+cpu
 tqdm==4.66.3
